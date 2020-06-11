@@ -1,0 +1,32 @@
+{
+  "name": "simple-wiremock",
+  "version": "1.0.0",
+  "description": "A mocking server for HTTP requests",
+  "main": "src/app/simple.wiremock.ts",
+  "scripts": {
+    "test": "ts-mocha -p tsconfig.json src/specs/**/*.spec.ts"
+  },
+  "keywords": [
+    "wiremock",
+    "http",
+    "mock",
+    "javascript wiremock",
+    "simple wiremock",
+    "server mock",
+    "mock server"
+  ],
+  "author": "Elton Moraes <eltonsimor@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.0.13",
+    "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^7.0.2",
+    "mocha": "^8.0.1",
+    "request": "^2.88.2",
+    "should": "^13.2.3",
+    "ts-mocha": "^7.0.0"
+  }
+}
