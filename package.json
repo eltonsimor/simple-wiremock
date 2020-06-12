@@ -2,7 +2,7 @@
   "name": "simple-wiremock",
   "version": "1.0.0",
   "description": "A mocking server for HTTP requests",
-  "main": "src/app/simple.wiremock.ts",
+  "main": "dist/simple.wiremock.js",
   "scripts": {
     "test": "ts-mocha -p tsconfig.json src/specs/**/*.spec.ts"
   },

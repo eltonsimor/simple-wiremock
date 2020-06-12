@@ -3,7 +3,7 @@
 
 ### Summary
 
-This project was created to help with tests with mocking Rest API from Backend.
+This project was created to help with tests mocking Rest API from Backend.
 
 ### Instructions to setup the project
 
@@ -98,7 +98,7 @@ simpleWiremock.get('/users', {
 
 #### Example with another http methods
 
-- Using HTTP POST
+- Using **HTTP POST**
 ```javascript
 simpleWiremock.post('/users', {
     status: 201,
@@ -110,7 +110,7 @@ simpleWiremock.post('/users', {
 });
 ```
 
-- Using HTTP PATCH
+- Using **HTTP PATCH**
 ```javascript
 simpleWiremock.patch('/users', {
     status: 202,
@@ -122,7 +122,7 @@ simpleWiremock.patch('/users', {
 });
 ```
 
-- Using HTTP DELETE
+- Using **HTTP DELETE**
 ```javascript
 simpleWiremock.delete('/users/1', {
     status: 202,
@@ -131,7 +131,7 @@ simpleWiremock.delete('/users/1', {
 });
 ```
 
-- Using HTTP OPTIONS
+- Using **HTTP OPTIONS**
 ```javascript
 simpleWiremock.options('/users/1', {
     status: 204,

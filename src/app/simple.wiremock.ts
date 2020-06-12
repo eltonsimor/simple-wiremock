@@ -59,7 +59,7 @@ export class SimpleWiremock {
 
     start() { 
         this.server.listen(SimpleWiremock.PORT, () => {
-            console.log(`Listening port: ${SimpleWiremock.PORT}`);
+            //console.log(`Listening port: ${SimpleWiremock.PORT}`);
         });
 
         this.server.on('connection', connection => {
