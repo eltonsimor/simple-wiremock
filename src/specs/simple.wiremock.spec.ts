@@ -69,4 +69,39 @@ describe('SimpleWiremock', () => {
             simpleWiremock.stop();
         });
     });
+
+    describe('Should do simple request spefic port', () => {
+
+        let simpleWiremock: SimpleWiremock;
+    
+        before(() => {
+            simpleWiremock = new SimpleWiremock()
+                                .setPort(5002)
+                                .start();
+
+            simpleWiremock.get("/users", {
+                status: 200,
+                headers: {"Content-Type": "applications"},
+                jsonBody: {
+                    name: 'Elton Moraes',
+                    age: 32
+                }
+            });
+        });
+
+        it('Should get users on random port', (done) => {
+            let port = SimpleWiremock.PORT;
+
+            request(`http://localhost:${port}/users`, (err, res, body) =>{
+                should.not.exist(err);
+                should.exist(res);
+                JSON.parse(body).should.containDeep({ name: 'Elton Moraes', age: 32 });
+                done();
+            });
+        });
+
+        after(() => {
+            simpleWiremock.stop();
+        });
+    });
 });
