@@ -1,4 +1,4 @@
-# SIMPLE WIREMOCK JS
+# SIMPLE WIREMOCK
 ---
 
 ### Summary

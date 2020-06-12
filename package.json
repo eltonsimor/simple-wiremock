@@ -1,6 +1,6 @@
 {
   "name": "simple-wiremock",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A mocking server for HTTP requests",
   "main": "dist/simple.wiremock.js",
   "scripts": {
