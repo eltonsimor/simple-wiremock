@@ -1,11 +1,17 @@
 {
   "name": "simple-wiremock",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "description": "A mocking server for HTTP requests",
-  "main": "dist/simple.wiremock.js",
+  "main": "libs/simple.wiremock.js",
+  "module": "libs/simple.wiremock.es.js",
+  "jsnext:main": "libs/simple.wiremock.es.js",
   "scripts": {
+    "build": "rollup -c",
     "test": "ts-mocha -p tsconfig.json src/specs/**/*.spec.ts"
   },
+  "files":[
+    "libs"
+  ],
   "keywords": [
     "wiremock",
     "http",
@@ -22,15 +28,20 @@
     "url": "https://github.com/eltonsimor/simple-wiremock"
   },
   "dependencies": {
-    "@types/node": "^14.0.13",
-    "typescript": "^3.9.5"
+    "@types/node": "^14.0.13"
   },
   "devDependencies": {
     "@types/expect": "^24.3.0",
     "@types/mocha": "^7.0.2",
     "mocha": "^8.0.1",
     "request": "^2.88.2",
+    "rollup": "^2.15.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-typescript2": "^0.27.1",
     "should": "^13.2.3",
-    "ts-mocha": "^7.0.0"
+    "ts-mocha": "^7.0.0",
+    "typescript": "^3.9.5"
   }
 }

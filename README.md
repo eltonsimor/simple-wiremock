@@ -17,13 +17,15 @@ npm i -D simple-wiremock
 
 After installed the package, above following the slice example code:
 
+- Example in **Typescript**:
+
 ```typescript
 import { SimpleWiremock } from 'simple-wiremock'
 
 const should = require('should');
 const request = require('request');
 
-describe((TestComponent) => {
+describe('TestComponent', () => {
     let simpleWiremock: SimpleWiremock;
 
     beforeAll(() => {
@@ -38,7 +40,7 @@ describe((TestComponent) => {
         });
     });
 
-    it(() => {
+    it('Should simple request get for users by id', () => {
         request('http://localhost:5001/users/1', (err, res, body) =>{
             should.not.exist(err);
             should.exist(res);
@@ -50,6 +52,31 @@ describe((TestComponent) => {
     afterAll(() => {
         simpleWiremock.stop();
     });
+});
+```
+
+- Example in **Javascript**:
+```javascript
+const sw = require('simple-wiremock');
+const should = require('should');
+const request = require('request');
+
+let simpleWiremock = new sw.SimpleWiremock().start();
+
+simpleWiremock.get('/users/1', {
+    status: 200,
+    headers: { 'Content-Type': 'applications/json' },
+    body: {
+        name: 'Austin Power',
+        age: 40
+    }
+});
+
+request('http://localhost:5001/users/1', (err, res, body) =>{
+    should.not.exist(err);
+    should.exist(res);
+    JSON.parse(body).should.containDeep({ name: 'Austin Power', age: 40 });
+    simpleWiremock.stop();
 });
 ```
 

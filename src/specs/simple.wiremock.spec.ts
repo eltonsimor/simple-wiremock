@@ -1,6 +1,7 @@
 import { SimpleWiremock } from '../app/simple.wiremock';
 import { before } from 'mocha';
 
+
 const should = require('should');
 const request = require('request');
 
@@ -22,7 +23,7 @@ describe('SimpleWiremock', () => {
         });
     
         it("Sould get users for http", (done) => {
-            request('http://localhost:5001/users', (err, res, body) =>{
+            request('http://localhost:5001/users', (err: any, res: any, body: string) =>{
                 should.not.exist(err);
                 should.exist(res);
                 JSON.parse(body).should.containDeep({ name: 'Austin Power', age: 60 });
@@ -57,7 +58,7 @@ describe('SimpleWiremock', () => {
         it('Should get users on random port', (done) => {
             let port = SimpleWiremock.PORT;
 
-            request(`http://localhost:${port}/users`, (err, res, body) =>{
+            request(`http://localhost:${port}/users`, (err: any, res: any, body: string) =>{
                 should.not.exist(err);
                 should.exist(res);
                 JSON.parse(body).should.containDeep({ name: 'Elton Moraes', age: 32 });
@@ -92,7 +93,7 @@ describe('SimpleWiremock', () => {
         it('Should get users on random port', (done) => {
             let port = SimpleWiremock.PORT;
 
-            request(`http://localhost:${port}/users`, (err, res, body) =>{
+            request(`http://localhost:${port}/users`, (err: any, res: any, body: string) =>{
                 should.not.exist(err);
                 should.exist(res);
                 JSON.parse(body).should.containDeep({ name: 'Elton Moraes', age: 32 });

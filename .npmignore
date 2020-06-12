@@ -1,2 +1,6 @@
 src/
-lib/
+libs/specs/
+
+rollup.config.js
+tsconfig.json
+.gitignore
