@@ -1,6 +1,6 @@
 {
   "name": "simple-wiremock",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A mocking server for HTTP requests",
   "main": "dist/simple.wiremock.js",
   "scripts": {
@@ -17,6 +17,10 @@
   ],
   "author": "Elton Moraes <eltonsimor@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eltonsimor/simple-wiremock"
+  },
   "dependencies": {
     "@types/node": "^14.0.13",
     "typescript": "^3.9.5"
