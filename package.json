@@ -2,15 +2,15 @@
   "name": "simple-wiremock",
   "version": "1.0.9",
   "description": "A mocking server for HTTP requests",
-  "main": "libs/simple.wiremock.js",
-  "module": "libs/simple.wiremock.es.js",
-  "jsnext:main": "libs/simple.wiremock.es.js",
+  "main": "dist/simple.wiremock.js",
+  "module": "dist/simple.wiremock.es.js",
+  "jsnext:main": "dist/simple.wiremock.es.js",
   "scripts": {
     "build": "rollup -c",
     "test": "ts-mocha -p tsconfig.json src/specs/**/*.spec.ts"
   },
   "files":[
-    "libs"
+    "dist"
   ],
   "keywords": [
     "wiremock",
