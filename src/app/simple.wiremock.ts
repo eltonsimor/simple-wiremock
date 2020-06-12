@@ -1,7 +1,7 @@
 import * as http from 'http';
 
 export class SimpleWiremock {
-    static PORT: any;
+    public static PORT: any;
 
     private isRandomPort = false;
     private connections = [];
@@ -30,31 +30,31 @@ export class SimpleWiremock {
     }
 
     get(url: string, response: any) {
-        this.assert('GET', url, response.jsonBody, response.status, response.headers);
+        this.assert('GET', url, response.body, response.status, response.headers);
     }
     
     post(url: string, response: any) {
-        this.assert('POST', url, response.jsonBody, response.status, response.headers);
+        this.assert('POST', url, response.body, response.status, response.headers);
     }
 
     put(url: string, response: any) {
-        this.assert('PUT', url, response.jsonBody, response.status, response.headers);
+        this.assert('PUT', url, response.body, response.status, response.headers);
     }
 
     patch(url: string, response: any) {
-        this.assert('PATCH', url, response.jsonBody, response.status, response.headers);
+        this.assert('PATCH', url, response.body, response.status, response.headers);
     }
 
     options(url: string, response: any) {
-        this.assert('OPTIONS', url, response.jsonBody, response.status, response.headers);
+        this.assert('OPTIONS', url, response.body, response.status, response.headers);
     }
 
     head(url: string, response: any) {
-        this.assert('HEAD', url, response.jsonBody, response.status, response.headers);
+        this.assert('HEAD', url, response.body, response.status, response.headers);
     }
 
     delete(url: string, response: any) {
-        this.assert('DELETE', url, response.jsonBody, response.status, response.headers);
+        this.assert('DELETE', url, response.body, response.status, response.headers);
     }
 
     start() { 

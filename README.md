@@ -31,7 +31,7 @@ describe((TestComponent) => {
         simpleWiremock.get('/users/1', {
             status: 200,
             headers: { 'Content-Type': 'applications/json' },
-            jsonBody: {
+            body: {
                 name: 'Austin Power',
                 age: 40
             }
@@ -71,11 +71,11 @@ describe((TestComponent) => {
     {
         status: number,
         headers: { '<Key>': 'value' },
-        jsonBody: your object response.
+        body: your object response.
     }
 ```
 
-> jsonBody accept a object and list.
+> body accept a object and list.
 
 #### Example mock returning a list:
 
@@ -83,7 +83,7 @@ describe((TestComponent) => {
 simpleWiremock.get('/users', {
     status: 200,
     headers: { 'Content-Type': 'applications/json' },
-    jsonBody: [
+    body: [
         {
             name: 'Austin Power',
             age: 40
@@ -103,7 +103,7 @@ simpleWiremock.get('/users', {
 simpleWiremock.post('/users', {
     status: 201,
     headers: { 'Content-Type': 'applications/json' },
-    jsonBody:{
+    body:{
         name: 'Austin Power',
         age: 40
     }
@@ -115,7 +115,7 @@ simpleWiremock.post('/users', {
 simpleWiremock.patch('/users', {
     status: 202,
     headers: { 'Content-Type': 'applications/json' },
-    jsonBody:{
+    body:{
         name: 'Austin Power',
         age: 40
     }
@@ -127,7 +127,7 @@ simpleWiremock.patch('/users', {
 simpleWiremock.delete('/users/1', {
     status: 202,
     headers: { 'Content-Type': 'applications/json' },
-    jsonBody:{}
+    body:{}
 });
 ```
 
@@ -136,7 +136,7 @@ simpleWiremock.delete('/users/1', {
 simpleWiremock.options('/users/1', {
     status: 204,
     headers: {},
-    jsonBody:{}
+    body:{}
 });
 ```
 
@@ -151,7 +151,7 @@ simpleWiremock.options('/users/1', {
         simpleWiremock.get('/users/1', {
             status: 200,
             headers: { 'Content-Type': 'applications/json' },
-            jsonBody: {
+            body: {
                 name: 'Austin Power',
                 age: 40
             }
@@ -160,3 +160,5 @@ simpleWiremock.options('/users/1', {
 
     ...
 ```
+
+> OBS: We always need to stop the server after our tests.

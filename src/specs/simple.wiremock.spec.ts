@@ -14,7 +14,7 @@ describe('SimpleWiremock', () => {
             simpleWiremock.get("/users", {
                 status: 200,
                 headers: {"Content-Type": "applications"},
-                jsonBody: {
+                body: {
                     name: 'Austin Power',
                     age: 60
                 }
@@ -47,7 +47,7 @@ describe('SimpleWiremock', () => {
             simpleWiremock.get("/users", {
                 status: 200,
                 headers: {"Content-Type": "applications"},
-                jsonBody: {
+                body: {
                     name: 'Elton Moraes',
                     age: 32
                 }
@@ -82,7 +82,7 @@ describe('SimpleWiremock', () => {
             simpleWiremock.get("/users", {
                 status: 200,
                 headers: {"Content-Type": "applications"},
-                jsonBody: {
+                body: {
                     name: 'Elton Moraes',
                     age: 32
                 }
