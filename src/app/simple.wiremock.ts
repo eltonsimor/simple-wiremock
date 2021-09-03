@@ -1,10 +1,18 @@
 import * as http from 'http';
 
+interface Assertion {
+    method: string,
+    path: string,
+    body: any,
+    status: number,
+    headers: any
+}
+
 export class SimpleWiremock {
     public static PORT: any;
 
     private connections: any = [];
-    private assertions: any;
+    private readonly assertions:  Record<string, Array<Assertion>>;
     private server: http.Server;
     private defaultPort = 5001;
 
@@ -16,10 +24,10 @@ export class SimpleWiremock {
             const response = this.assertPosition(keygen);
             this.allowCrossDomain(res);
             if (response != null) {
-                res.writeHead(response.assertion.status, response.assertion.headers);
-                res.end(JSON.stringify(response.assertion.body));
+                res.writeHead(response.status, response.headers);
+                res.end(JSON.stringify(response.body));
             } else {
-                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.writeHead(500, {'Content-Type': 'text/plain'});
                 res.end('No Matching Response!\n');
                 throw new Error('No Match For: ' + req.method + ' ' + req.url);
             }
@@ -35,7 +43,7 @@ export class SimpleWiremock {
     get(url: string, response: any) {
         this.assert('GET', url, response.body, response.status, response.headers);
     }
-    
+
     post(url: string, response: any) {
         this.assert('POST', url, response.body, response.status, response.headers);
     }
@@ -60,7 +68,7 @@ export class SimpleWiremock {
         this.assert('DELETE', url, response.body, response.status, response.headers);
     }
 
-    start() { 
+    start() {
         this.server.listen(SimpleWiremock.PORT, () => {
             //console.log(`Listening port: ${SimpleWiremock.PORT}`);
         });
@@ -73,39 +81,43 @@ export class SimpleWiremock {
     }
 
     stop() {
-       this.server.close();
-       this.connections.forEach((curr: { end: () => any; }) => curr.end());
+        this.server.close();
+        this.connections.forEach((curr: { end: () => any; }) => curr.end());
     }
 
-    enableRandomPort(){
+    enableRandomPort() {
         SimpleWiremock.PORT = this.randomPort();
         return this;
     }
 
-    setPort(port: number){
+    setPort(port: number) {
         SimpleWiremock.PORT = port;
         return this;
     }
 
-    private randomPort(){
+    private randomPort() {
         return Math.trunc(this.defaultPort + (Math.random() * 500));
     }
 
     private assert(httpMethod: string, path: string, objectBody: any, statusCode: number, httpHeaders: any) {
         const keygen = this.generateKey(httpMethod, path);
-        this.assertions[keygen] = {
-            key: keygen,
-            assertion: {
-                body: objectBody,
-                status: statusCode,
-                method: httpMethod,
-                headers: httpHeaders
-            }
-        };
+
+        let assertionList: Array<Assertion> = this.assertions[keygen];
+        if (assertionList === null || assertionList === undefined) {
+            assertionList = new Array<Assertion>();
+            this.assertions[keygen] = assertionList;
+        }
+        assertionList.push({
+            body: objectBody,
+            status: statusCode,
+            method: httpMethod,
+            headers: httpHeaders,
+            path: path
+        });
     }
 
-    private assertPosition(key: string) {
-        return this.assertions[key];
+    private assertPosition(key: string): Assertion {
+        return this.assertions[key].reverse().pop();
     }
 
     private generateKey(method: string, path: string) {
@@ -118,3 +130,5 @@ export class SimpleWiremock {
         res.setHeader('Access-Control-Allow-Headers', '*');
     }
 }
+
+

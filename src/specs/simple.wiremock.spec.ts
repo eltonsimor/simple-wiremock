@@ -21,14 +21,28 @@ describe('SimpleWiremock', () => {
                 }
             });
         });
-    
-        it("Sould get users for http", (done) => {
+
+        it("Should get different users for same http call", (done) => {
+            simpleWiremock.get("/users", {
+                status: 200,
+                headers: {"Content-Type": "applications"},
+                body: {
+                    name: 'Power ranger',
+                    age: 70
+                }
+            });
             request('http://localhost:5001/users', (err: any, res: any, body: string) =>{
                 should.not.exist(err);
                 should.exist(res);
                 JSON.parse(body).should.containDeep({ name: 'Austin Power', age: 60 });
-                done();
+                request('http://localhost:5001/users', (err: any, res: any, body: string) =>{
+                    should.not.exist(err);
+                    should.exist(res);
+                    JSON.parse(body).should.containDeep({ name: 'Power ranger', age: 70 });
+                    done();
+                });
             });
+
         });
     
         after(() => {
@@ -36,73 +50,4 @@ describe('SimpleWiremock', () => {
         });
     });
 
-    describe('Should do simple request random port', () => {
-
-        let simpleWiremock: SimpleWiremock;
-    
-        before(() => {
-            simpleWiremock = new SimpleWiremock()
-                                .enableRandomPort()
-                                .start();
-
-            simpleWiremock.get("/users", {
-                status: 200,
-                headers: {"Content-Type": "applications"},
-                body: {
-                    name: 'Elton Moraes',
-                    age: 32
-                }
-            });
-        });
-
-        it('Should get users on random port', (done) => {
-            let port = SimpleWiremock.PORT;
-
-            request(`http://localhost:${port}/users`, (err: any, res: any, body: string) =>{
-                should.not.exist(err);
-                should.exist(res);
-                JSON.parse(body).should.containDeep({ name: 'Elton Moraes', age: 32 });
-                done();
-            });
-        });
-
-        after(() => {
-            simpleWiremock.stop();
-        });
-    });
-
-    describe('Should do simple request spefic port', () => {
-
-        let simpleWiremock: SimpleWiremock;
-    
-        before(() => {
-            simpleWiremock = new SimpleWiremock()
-                                .setPort(5002)
-                                .start();
-
-            simpleWiremock.get("/users", {
-                status: 200,
-                headers: {"Content-Type": "applications"},
-                body: {
-                    name: 'Elton Moraes',
-                    age: 32
-                }
-            });
-        });
-
-        it('Should get users on random port', (done) => {
-            let port = SimpleWiremock.PORT;
-
-            request(`http://localhost:${port}/users`, (err: any, res: any, body: string) =>{
-                should.not.exist(err);
-                should.exist(res);
-                JSON.parse(body).should.containDeep({ name: 'Elton Moraes', age: 32 });
-                done();
-            });
-        });
-
-        after(() => {
-            simpleWiremock.stop();
-        });
-    });
 });
